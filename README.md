@@ -13,7 +13,7 @@ Native Applications that follows the RPC pattern **[3]**.
 - Grant the communication from the customer service to the restaurant service in order to get the total amount for the billing account to pay.
 
 ## gRPC Diagram **[5]**:
-![gRPC diagram.svg](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20diagram.svg)
+![gRPC diagram.svg](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fresources%2Fstatic%2FgRPC%20diagram.svg)
 
 ****
 
@@ -28,22 +28,22 @@ Native Applications that follows the RPC pattern **[3]**.
 
 - Open the project and execute ``` mvn clean install ``` and verify that the protobuf model gets generated as it is shown in the image bellow:
 
-![ProtoBuff model.png](src%2Fmain%2Fresources%2Fstatic%2FProtoBuff%20model.png)
+![ProtoBuff model.png](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fresources%2Fstatic%2FProtoBuff%20model.png)
 
-- Open the project and right click in both [CustomerServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FCustomerServer.java) and [RestaurantServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FRestaurantServer.java) classes.
+- Open the project and right click in both [CustomerServer.java](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FCustomerServer.java) and [RestaurantServer.java](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FRestaurantServer.java) classes.
 - Download BloomRPC to be used as a client to make requests to both services **[6]**.
-- Load both the [customer.proto](src%2Fmain%2Fproto%2Fcustomer.proto) and the [restaurant_dish.proto](src%2Fmain%2Fproto%2Frestaurant_dish.proto) in the BloomRPC interface:
+- Load both the [customer.proto](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fproto%2Fcustomer.proto) and the [restaurant_dish.proto](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fproto%2Frestaurant_dish.proto) in the BloomRPC interface:
 - Specify the ports for each service as it is shown in the image bellow and execute an unary call per each service. Verify that the dishes_amount proto field that representes the billing account to pay has the value of the sum of all the dishes associate it with the customer "william"
 
 #### Customer:
-![Customer ProtoBuff.png](src%2Fmain%2Fresources%2Fstatic%2FCustomer%20ProtoBuff.png)
+![Customer ProtoBuff.png](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fresources%2Fstatic%2FCustomer%20ProtoBuff.png)
 ****
-![gRPC call to CustomerServer.png](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20CustomerServer.png)
+![gRPC call to CustomerServer.png](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20CustomerServer.png)
 
 #### Restaurant:
-![Restaurant ProtoBuff.png](src%2Fmain%2Fresources%2Fstatic%2FRestaurant%20ProtoBuff.png)
+[restaurant_dish.proto](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fproto%2Frestaurant_dish.proto)
 ****
-![gRPC call to RestaurantServer.png](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20RestaurantServer.png)
+![gRPC call to RestaurantServer.png](architectural-trends-grpc-poc%2Fsrc%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20RestaurantServer.png)
 
 ******
 
