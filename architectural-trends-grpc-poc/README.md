@@ -68,3 +68,4 @@ As it was shown in the previous screenshots, the CustomerService was able to com
 4. [gRPC Up & Running, 1st Edition, Kasun Indrasiri, Danesh Kuruppu , 2020](https://www.amazon.com/gRPC-Running-Building-Applications-Kubernetes/dp/1492058335)
 5. [Introduction to gRPC](https://grpc.io/docs/what-is-grpc/introduction/)
 6. [BloomRPC client](https://github.com/bloomrpc/bloomrpc)
+7. [Docker In Practice, 2nd Edition, Ian Miell, Aidan Hobson Sayers, 2019](https://www.manning.com/books/docker-in-practice-second-edition)
