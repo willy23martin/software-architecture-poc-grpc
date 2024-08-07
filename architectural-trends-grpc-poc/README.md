@@ -7,10 +7,10 @@ Native Applications that follows the RPC pattern **[3]**.
 ****
 
 ## Objectives:
-- Define the ProtoBuffs for 2 services: customer and restaurant.
-- Integrate them with a database in which customers and restaurant dishes information are stored.
+- Define the ProtoBuffs for 2 services: customer and order.
+- Integrate them with a database in which customers and order  information are stored.
 - Publish both services to be consumed by a client like BloomRPC **[6]**
-- Grant the communication from the customer service to the restaurant service in order to get the total amount for the billing account to pay.
+- Grant the communication from the customer service to the order service in order to get the total amount for the billing account to pay.
 
 ## gRPC Diagram **[5]**:
 ![gRPC diagram.svg](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20diagram.svg)
@@ -18,7 +18,7 @@ Native Applications that follows the RPC pattern **[3]**.
 ****
 
 ### Technologies used: 
-- **Java 1.8** as a programming language with maven.
+- **Java 17** as a programming language with maven.
 - **grpc-netty-shaded**: **HTTP/2** transport library.
 - **grpc-protobuf**, and **protobuf-maven-plugin**: for interpretation of the proto files to the protocolBuffers model to be implemented by the services.
 
@@ -30,25 +30,25 @@ Native Applications that follows the RPC pattern **[3]**.
 
 ![ProtoBuff model.png](src%2Fmain%2Fresources%2Fstatic%2FProtoBuff%20model.png)
 
-- Open the project and right click in both [CustomerServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FCustomerServer.java) and [RestaurantServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FRestaurantServer.java) classes.
+- Open the project and right click in both [CustomerServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FCustomerServer.java) and [orderServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2ForderServer.java) classes.
 - Download BloomRPC to be used as a client to make requests to both services **[6]**.
-- Load both the [customer.proto](src%2Fmain%2Fproto%2Fcustomer.proto) and the [restaurant_dish.proto](src%2Fmain%2Fproto%2Frestaurant_dish.proto) in the BloomRPC interface:
-- Specify the ports for each service as it is shown in the image bellow and execute an unary call per each service. Verify that the dishes_amount proto field that representes the billing account to pay has the value of the sum of all the dishes associate it with the customer "william"
+- Load both the [customer.proto](src%2Fmain%2Fproto%2Fcustomer.proto) and the [order_dish.proto](src%2Fmain%2Fproto%2Forder_dish.proto) in the BloomRPC interface:
+- Specify the ports for each service as it is shown in the image bellow and execute an unary call per each service. Verify that the _amount proto field that representes the billing account to pay has the value of the sum of all the  associate it with the customer "william"
 
 #### Customer:
 ![Customer ProtoBuff.png](src%2Fmain%2Fresources%2Fstatic%2FCustomer%20ProtoBuff.png)
 ****
 ![gRPC call to CustomerServer.png](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20CustomerServer.png)
 
-#### Restaurant:
-![Restaurant ProtoBuff.png](src%2Fmain%2Fresources%2Fstatic%2FRestaurant%20ProtoBuff.png)
+#### order:
+![order ProtoBuff.png](src%2Fmain%2Fresources%2Fstatic%2Forder%20ProtoBuff.png)
 ****
-![gRPC call to RestaurantServer.png](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20RestaurantServer.png)
+![gRPC call to orderServer.png](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20orderServer.png)
 
 ******
 
 ### Results:
-As it was shown in the previous screenshots, the CustomerService was able to communicate to the Restaurant one through a Channel used in the RestaurantClient and the serialization and deserialization was efficiently performed by both services.
+As it was shown in the previous screenshots, the CustomerService was able to communicate to the order one through a Channel used in the orderClient and the serialization and deserialization was efficiently performed by both services.
 
 ******
 
