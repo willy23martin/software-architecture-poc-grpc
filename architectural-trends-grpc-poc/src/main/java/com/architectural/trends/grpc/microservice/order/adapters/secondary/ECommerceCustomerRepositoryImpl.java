@@ -1,4 +1,8 @@
-package com.architectural.trends.grpc.database;
+package com.architectural.trends.grpc.microservice.order.adapters.secondary;
+
+import com.architectural.trends.grpc.microservice.order.database.H2DatabaseConnection;
+import com.architectural.trends.grpc.microservice.order.domain.ECommerceCustomer;
+import com.architectural.trends.grpc.microservice.order.ports.secondary.ECommerceCustomerRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +11,12 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerDAO {
-    private static final Logger logger = Logger.getLogger(CustomerDAO.class.getName());
+public class ECommerceCustomerRepositoryImpl implements ECommerceCustomerRepository {
+    private static final Logger logger = Logger.getLogger(ECommerceCustomerRepositoryImpl.class.getName());
 
-    public Customer getDetails(String name) {
-        Customer customer = new Customer();
+    @Override
+    public ECommerceCustomer getDetails(String name) {
+        ECommerceCustomer customer = new ECommerceCustomer();
         try {
             Connection connection = H2DatabaseConnection.getConnectionToDatabase();
             PreparedStatement preparedStatement = connection.prepareStatement("select * from customers where name=?");

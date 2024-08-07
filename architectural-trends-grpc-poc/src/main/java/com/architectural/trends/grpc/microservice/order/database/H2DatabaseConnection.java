@@ -1,4 +1,4 @@
-package com.architectural.trends.grpc.database;
+package com.architectural.trends.grpc.microservice.order.database;
 
 import org.h2.tools.RunScript;
 import org.h2.tools.Server;

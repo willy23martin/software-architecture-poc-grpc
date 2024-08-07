@@ -9,7 +9,7 @@ Native Applications that follows the RPC pattern **[3]**.
 ## Objectives:
 - Define the ProtoBuffs for 2 services: customer and restaurant.
 - Integrate them with a database in which customers and restaurant dishes information are stored.
-- Publish both services to be consumed by a client like BloomRPC **[6]**
+- Publish both services to be consumed by a client like BloomRPC **[6]**.
 - Grant the communication from the customer service to the restaurant service in order to get the total amount for the billing account to pay.
 
 ## gRPC Diagram **[5]**:
@@ -20,7 +20,7 @@ Native Applications that follows the RPC pattern **[3]**.
 ### Technologies used: 
 - **Java 1.8** as a programming language with maven.
 - **grpc-netty-shaded**: **HTTP/2** transport library.
-- **grpc-protobuf**, and **protobuf-maven-plugin**: for interpretation of the proto files to the protocolBuffers model to be implemented by the services.
+- **grpc-protobuf**, and **protobuf-maven-plugin**: for compilation of the proto files to the protocolBuffers model to be implemented by the services.
 
 ****
 

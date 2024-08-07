@@ -1,6 +1,6 @@
-package com.architectural.trends.grpc.servers;
+package com.architectural.trends.grpc.microservice.order.servers;
 
-import com.architectural.trends.grpc.services.CustomerServiceImpl;
+import com.architectural.trends.grpc.microservice.order.adapters.primary.ECommerceCustomerServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerServer {
+public class ECommerceCustomerServer {
 
-    private static final Logger logger = Logger.getLogger(CustomerServer.class.getName());
+    private static final Logger logger = Logger.getLogger(ECommerceCustomerServer.class.getName());
     private Server server;
 
     /**
@@ -21,7 +21,7 @@ public class CustomerServer {
         int port = 50051;
         try {
             server = ServerBuilder.forPort(port)
-                    .addService(new CustomerServiceImpl())
+                    .addService(new ECommerceCustomerServiceImpl())
                     .build()
                     .start();
             logger.info( "CustomerServer started.");
@@ -32,7 +32,7 @@ public class CustomerServer {
                 public void run() {
                     logger.info( "CustomerServer shutdown in case JVM shutdown");
                     try {
-                        CustomerServer.this.stopServer();
+                        ECommerceCustomerServer.this.stopServer();
                     } catch (InterruptedException exception) {
                         logger.log(Level.SEVERE, "CustomerServer shutdown interrupted", exception);
                     }
@@ -56,7 +56,7 @@ public class CustomerServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        CustomerServer customerServer = new CustomerServer();
+        ECommerceCustomerServer customerServer = new ECommerceCustomerServer();
         customerServer.startServer();
         customerServer.blockUntilShutdown(); // Keep running until stop server is called.
     }

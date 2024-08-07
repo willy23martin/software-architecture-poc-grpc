@@ -1,6 +1,6 @@
-package com.architectural.trends.grpc.database;
+package com.architectural.trends.grpc.microservice.order.domain;
 
-public class Customer {
+public class ECommerceCustomer {
     private int id;
     private String name;
     private int age;

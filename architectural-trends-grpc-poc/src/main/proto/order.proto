@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.architectural.trends.grpc.order";
+option java_multiple_files = true;
+
+service OrderService {
+  // Unary RPC pattern
+  rpc retrieveOrdersForCustomer(OrderRequest) returns (OrderResponse);
+  // Server Streaming RPC pattern
+  rpc retrieveOrdersForSearchCriterion(google.protobuf.StringValue) returns (stream OrderResponse);
+}
+
+message OrderRequest {
+  int32 customer_id = 1;
+}
+
+message OrderResponse {
+  repeated Order order = 1; // Collection of orders inside the response
+}
+
+message Order {
+  int32 product_id = 1;
+  int32 customer_id = 2;
+  int32 no_of_items = 4;
+  double total_amount = 5; // Field number 5 in the order message
+}

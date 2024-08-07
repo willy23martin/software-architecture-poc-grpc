@@ -1,6 +1,6 @@
-package com.architectural.trends.grpc.servers;
+package com.architectural.trends.grpc.microservice.order.servers;
 
-import com.architectural.trends.grpc.services.RestaurantServiceImpl;
+import com.architectural.trends.grpc.microservice.order.adapters.primary.OrderServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RestaurantServer {
+public class OrderServer {
 
-    private static final Logger logger = Logger.getLogger(RestaurantServer.class.getName());
+    private static final Logger logger = Logger.getLogger(OrderServer.class.getName());
     private Server server;
 
     /**
@@ -21,25 +21,25 @@ public class RestaurantServer {
         int port = 50052;
         try {
             server = ServerBuilder.forPort(port)
-                    .addService(new RestaurantServiceImpl())
+                    .addService(new OrderServiceImpl())
                     .build()
                     .start();
-            logger.info( "RestaurantServer started.");
+            logger.info( "OrderServer started.");
 
             // In case JVM is killed, then we need to ensure we stop the server.
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 @Override
                 public void run() {
-                    logger.info( "RestaurantServer shutdown in case JVM shutdown");
+                    logger.info( "OrderServer shutdown in case JVM shutdown");
                     try {
-                        RestaurantServer.this.stopServer();
+                        OrderServer.this.stopServer();
                     } catch (InterruptedException exception) {
-                        logger.log(Level.SEVERE, "RestaurantServer shutdown interrupted", exception);
+                        logger.log(Level.SEVERE, "OrderServer shutdown interrupted", exception);
                     }
                 }
             });
         } catch(IOException exception) {
-            logger.log(Level.SEVERE, "cannot start restaurant server", exception);
+            logger.log(Level.SEVERE, "cannot start order server", exception);
         }
     }
 
@@ -56,8 +56,8 @@ public class RestaurantServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        RestaurantServer restaurantServer = new RestaurantServer();
-        restaurantServer.startServer();
-        restaurantServer.blockUntilShutdown(); // Keep running until stop server is called.
+        OrderServer orderServer = new OrderServer();
+        orderServer.startServer();
+        orderServer.blockUntilShutdown(); // Keep running until stop server is called.
     }
 }

@@ -1,13 +1,10 @@
-package com.architectural.trends.grpc.database;
+package com.architectural.trends.grpc.microservice.order.domain;
 
-import java.util.Date;
-
-public class RestaurantDish {
+public class Order {
+    private int productId;
     private int customerId;
-    private int dish_id;
     private int numberOfItems;
     private double amount;
-    private Date date;
 
     public int getCustomerId() {
         return customerId;
@@ -17,20 +14,12 @@ public class RestaurantDish {
         this.customerId = customerId;
     }
 
-    public int getDish_id() {
-        return dish_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setDish_id(int dish_id) {
-        this.dish_id = dish_id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getNumberOfItems() {
@@ -48,4 +37,10 @@ public class RestaurantDish {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "Order [customerId=" + customerId + ", productId=" + productId + ", numberOfItems=" + numberOfItems + ", amount=" + amount + "]";
+    }
+
 }
