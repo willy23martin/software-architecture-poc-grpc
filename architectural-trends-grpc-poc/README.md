@@ -21,8 +21,15 @@ Native Applications that follows the RPC pattern **[3]**.
 - **Java 17** as a programming language with maven.
 - **grpc-netty-shaded**: **HTTP/2** transport library.
 - **grpc-protobuf**, and **protobuf-maven-plugin**: for interpretation of the proto files to the protocolBuffers model to be implemented by the services.
+- **Docker** to package the service in a container.
 
 ****
+
+### How to run it using Docker?
+- The [OrderServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fmicroservice%2Forder%2Fservers%2FOrderServer.java) uses the **port 50052** for both **Unary RPC** and **Server Streaming RPC** calls.
+- Go to the **Dockerfile directory** using the **CLI**: [Dockerfile](Dockerfile)
+- **Build image**: execute the following command: ```docker build --tag=poc-grpc-project-1.0:1.1.0-beta .```
+- **Execute the container**: execute the following command: ``` docker run -p50052:50052 poc-grpc-project-1.0:1.1.0-beta```
 
 ### How to test it?
 
@@ -33,14 +40,14 @@ Native Applications that follows the RPC pattern **[3]**.
 - Open the project and right click in both [CustomerServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2FCustomerServer.java) and [orderServer.java](src%2Fmain%2Fjava%2Fcom%2Farchitectural%2Ftrends%2Fgrpc%2Fservers%2ForderServer.java) classes.
 - Download BloomRPC to be used as a client to make requests to both services **[6]**.
 - Load both the [customer.proto](src%2Fmain%2Fproto%2Fcustomer.proto) and the [order_dish.proto](src%2Fmain%2Fproto%2Forder_dish.proto) in the BloomRPC interface:
-- Specify the ports for each service as it is shown in the image bellow and execute an unary call per each service. Verify that the _amount proto field that representes the billing account to pay has the value of the sum of all the  associate it with the customer "william"
+- Specify the ports for each service as it is shown in the image bellow and execute an unary call per each service. Verify that the _amount proto field that represents the billing account to pay has the value of the sum of all the  associate it with the customer "william"
 
 #### Customer:
 ![Customer ProtoBuff.png](src%2Fmain%2Fresources%2Fstatic%2FCustomer%20ProtoBuff.png)
 ****
 ![gRPC call to CustomerServer.png](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20CustomerServer.png)
 
-#### order:
+#### Order:
 ![order ProtoBuff.png](src%2Fmain%2Fresources%2Fstatic%2Forder%20ProtoBuff.png)
 ****
 ![gRPC call to orderServer.png](src%2Fmain%2Fresources%2Fstatic%2FgRPC%20call%20to%20orderServer.png)
@@ -68,3 +75,4 @@ As it was shown in the previous screenshots, the CustomerService was able to com
 4. [gRPC Up & Running, 1st Edition, Kasun Indrasiri, Danesh Kuruppu , 2020](https://www.amazon.com/gRPC-Running-Building-Applications-Kubernetes/dp/1492058335)
 5. [Introduction to gRPC](https://grpc.io/docs/what-is-grpc/introduction/)
 6. [BloomRPC client](https://github.com/bloomrpc/bloomrpc)
+7. [Docker In Practice, 2nd Edition, Ian Miell, Aidan Hobson Sayers, 2019](https://www.manning.com/books/docker-in-practice-second-edition)
