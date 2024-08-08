@@ -31,6 +31,12 @@ Native Applications that follows the RPC pattern **[3]**.
 - **Build image**: execute the following command: ```docker build --tag=poc-grpc-project-1.0:1.1.0-beta .```
 - **Execute the container**: execute the following command: ``` docker run -p50052:50052 poc-grpc-project-1.0:1.1.0-beta```
 
+### How to run it using Kubernetes?
+- Go to the **kubernetes-deployment directory** using the **CLI**: [kubernetes-deployment.yaml](kubernetes-deployment.yaml)
+- **Build image**: execute the following command: ```docker build --tag=poc-grpc-project-1.0:1.1.0-beta .```
+- **Create the Kubernetes Deployment**: execute the following command: ``` kubectl apply -f .```
+- **Port forward the 50052 port**: execute the following command: ```kubectl port-forward poc-grpc-deployment-<pod_name> 50052:50052```
+
 ### How to test it?
 
 - Open the project and execute ``` mvn clean install ``` and verify that the protobuf model gets generated as it is shown in the image bellow:
@@ -76,3 +82,6 @@ As it was shown in the previous screenshots, the CustomerService was able to com
 5. [Introduction to gRPC](https://grpc.io/docs/what-is-grpc/introduction/)
 6. [BloomRPC client](https://github.com/bloomrpc/bloomrpc)
 7. [Docker In Practice, 2nd Edition, Ian Miell, Aidan Hobson Sayers, 2019](https://www.manning.com/books/docker-in-practice-second-edition)
+8. [Cloud Native DevOps with Kubernetes, 1st Edition, John Arundel, Justin Domingus, 2019](https://www.amazon.com/Cloud-Native-DevOps-Kubernetes-Applications/dp/1492040762)
+9. [Cloud Native Spring In Action, 1st Edition, Thomas Vitale, 2023](https://www.manning.com/books/cloud-native-spring-in-action)
+10. [Cloud Native Buildpacks (CNB)](https://buildpacks.io/docs/)

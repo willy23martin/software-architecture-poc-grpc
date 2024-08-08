@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine as build
+FROM openjdk:17-jdk-alpine
 
 LABEL maintainer="William Martin Chavez Gonzalez"
 
