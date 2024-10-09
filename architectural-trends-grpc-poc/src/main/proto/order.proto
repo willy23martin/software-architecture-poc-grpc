@@ -10,6 +10,8 @@ service OrderService {
   rpc retrieveOrdersForCustomer(OrderRequest) returns (OrderResponse);
   // Server Streaming RPC pattern
   rpc retrieveOrdersForSearchCriterion(google.protobuf.StringValue) returns (stream OrderResponse);
+  // Client Streaming RPC pattern
+  rpc updateOrders(stream Order) returns (google.protobuf.StringValue);
 }
 
 message OrderRequest {

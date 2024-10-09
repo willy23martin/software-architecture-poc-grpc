@@ -7,10 +7,12 @@ import com.architectural.trends.grpc.order.OrderRequest;
 import com.architectural.trends.grpc.order.OrderResponse;
 import com.architectural.trends.grpc.order.OrderServiceGrpc;
 import com.architectural.trends.grpc.microservice.order.operations.Utils;
+import com.google.protobuf.StringValue;
 import io.grpc.stub.StreamObserver;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -73,6 +75,51 @@ public class OrderServiceImpl extends OrderServiceGrpc.OrderServiceImplBase {
             }
         }
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<com.architectural.trends.grpc.order.Order> updateOrders
+            (
+                    StreamObserver<StringValue> responseObserver
+            )
+    {
+        StreamObserver<com.architectural.trends.grpc.order.Order> ordersToUpdateObserver = new StreamObserver<com.architectural.trends.grpc.order.Order>() {
+            String ordersStatus = "Orders' status: \n";
+            @Override
+            public void onNext(com.architectural.trends.grpc.order.Order order) {
+                ordersStatus += updateOrder(order, ordersStatus);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                // Not supported yet
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onNext(
+                        StringValue.newBuilder()
+                                .setValue(ordersStatus)
+                                .build()
+                );
+                responseObserver.onCompleted();
+            }
+        };
+        return ordersToUpdateObserver;
+    }
+
+    private String updateOrder(com.architectural.trends.grpc.order.Order order, String ordersStatus) {
+        logger.info("Looking for the order with customerId, productId: " + order.getCustomerId() + "-" + order.getProductId());
+        List<Order> orders = orderDAO.getOrders(order.getCustomerId(), order.getProductId());
+        Optional<Order> orderFound = orders.stream().findFirst();
+        if(orderFound.isPresent()) {
+            logger.info("Updating the order with customerId, productId: " + order.getCustomerId() + "-" + order.getProductId());
+            ordersStatus += orderDAO.updateOrder(orderFound.get()) ? "Order updated: " + order.getCustomerId() + "-" + order.getProductId() : "Order not updated: " + order.getCustomerId() + "-" + order.getProductId();
+            ordersStatus += "\n";
+        } else {
+            ordersStatus += "Order not found and cannot be updated: " + order.getCustomerId() + "-" + order.getProductId() + "\n";
+        }
+        return ordersStatus;
     }
 
 }

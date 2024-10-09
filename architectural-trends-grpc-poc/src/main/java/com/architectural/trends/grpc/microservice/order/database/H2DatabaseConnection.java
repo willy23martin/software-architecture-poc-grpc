@@ -26,6 +26,8 @@ public class H2DatabaseConnection {
             logger.log(Level.SEVERE, "Could not find the .sql file", exception);
         } catch (SQLException exception) {
             logger.log(Level.SEVERE, "SQL error", exception);
+        } finally {
+            logger.log(Level.INFO, "Database has been initialized successfully");
         }
     }
 

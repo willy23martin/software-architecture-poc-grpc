@@ -1,6 +1,3 @@
-drop table orders if exists;
-drop table customers if exists;
-
 CREATE TABLE customers (
                       id int(11) NOT NULL AUTO_INCREMENT,
                       name varchar(50) DEFAULT NULL,
