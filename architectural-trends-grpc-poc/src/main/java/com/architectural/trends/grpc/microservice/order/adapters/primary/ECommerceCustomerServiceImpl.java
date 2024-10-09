@@ -41,6 +41,12 @@ public class ECommerceCustomerServiceImpl extends CustomerServiceGrpc.CustomerSe
          */
         retrieveOrdersForSearchCriterion(orderConverter.convertToString(searchCriterion));
         responseObserver.onCompleted();
+
+        /**
+         * Client Streaming RPC Call
+         */
+        updateOrders();
+
     }
 
     private CustomerResponse buildCustomerResponse(com.architectural.trends.grpc.microservice.order.domain.ECommerceCustomer customer) {
@@ -94,4 +100,22 @@ public class ECommerceCustomerServiceImpl extends CustomerServiceGrpc.CustomerSe
             logger.log(Level.SEVERE, "ECommerceCustomerClient channel shutdown interrupted", exception);
         }
     }
+
+    private void updateOrders() {
+        logger.info("Creating a channel against the OrderServer to update orders");
+
+        ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:50052")
+                .usePlaintext()
+                .build();
+
+        ECommerceCustomer ordersClient = new ECommerceCustomer(channel);
+        ordersClient.updateOrders();
+
+        try {
+            channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+        } catch (InterruptedException exception) {
+            logger.log(Level.SEVERE, "ECommerceCustomerClient channel shutdown interrupted", exception);
+        }
+    }
+
 }

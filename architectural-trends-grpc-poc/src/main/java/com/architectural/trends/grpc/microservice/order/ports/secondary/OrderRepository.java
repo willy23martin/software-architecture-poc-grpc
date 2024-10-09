@@ -6,8 +6,11 @@ import java.util.List;
 
 public interface OrderRepository {
 
-
     List<Order> getOrders(int customerId);
 
     List<Order> getOrders();
+
+    List<Order> getOrders(int customerId, int productId);
+
+    boolean updateOrder(Order order);
 }
